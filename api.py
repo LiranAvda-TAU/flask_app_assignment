@@ -1,5 +1,5 @@
 from flask import Flask, request, session, abort
-from .db import get_db, init_app
+from db import get_db, init_app
 import os
 from marshmallow import Schema, fields
 
@@ -243,7 +243,6 @@ def get_user_name_by_id(user_id):
         ' FROM user'
         ' WHERE id = ?',
         (user_id,)).fetchone()[0]
-    print(user_name)
     return user_name
 
 
