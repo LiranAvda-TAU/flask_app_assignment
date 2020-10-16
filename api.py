@@ -1,5 +1,5 @@
 from flask import Flask, request, session, abort
-from flask_app.db import get_db, init_app
+from .db import get_db, init_app
 import os
 from marshmallow import Schema, fields
 
