@@ -149,12 +149,12 @@ def get_messages():
         ' WHERE receiver_id = ?',
         (session['user_id'],)).fetchall()
 
-    messages_list = list()
+    messages_dic = dict()
     for db_row in db_rows:
         if db_row['new']:
             update_to_old_message(db_row['id'])
-        messages_list.append(message_dict_from_row(db_row))
-    return str(messages_list)
+        messages_dic[db_row['id']] = message_dict_from_row(db_row)
+    return messages_dic
 
 
 @app.route('/get_new')
@@ -166,11 +166,11 @@ def get_new_messages():
         ' FROM message'
         ' WHERE receiver_id = ? AND new = ?',
         (session['user_id'], True,)).fetchall()
-    messages_list = list()
+    messages_dic = dict()
     for db_row in db_rows:
         update_to_old_message(db_row['id'])
-        messages_list.append(message_dict_from_row(db_row))
-    return str(messages_list)
+        messages_dic[db_row['id']] = message_dict_from_row(db_row)
+    return messages_dic
 
 
 @app.route('/read')
