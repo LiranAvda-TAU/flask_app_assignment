@@ -188,7 +188,7 @@ def read_message():
                 ' WHERE id = ? AND receiver_id = ?',
                 (message_id, session['user_id'],)).fetchone()
             if db_row is None:
-                error = 'Message id {0} does not exist or was not sent to you.'.format(message_id)
+                error = 'Message id {0} does not exist_ids or was not sent to you.'.format(message_id)
             else:
                 update_to_old_message(message_id)
                 return message_dict_from_row(db_row)
@@ -212,7 +212,7 @@ def delete_message():
                                  ' WHERE id = ?',
                                  (message_id,)).fetchone()
             if not ids_row:
-                error = 'Message does not exist.'
+                error = 'Message does not exist_ids.'
             elif ids_row['sender_id'] != session['user_id'] and ids_row['receiver_id'] != session['user_id']:
                 error = 'Message can only be deleted by sender or receiver of the message.'
             else:
